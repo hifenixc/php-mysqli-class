@@ -71,6 +71,10 @@ class db {
 			return false;
 		}
 	}
+	
+	public static function update_table($table, $fields, $where){
+		db::update("UPDATE {$table} ".self::implode_for_update($fields)." WHERE {$where}")
+	}
 
 	public static function delete($query){
 		$db = self::connect_to_master();
@@ -210,6 +214,22 @@ class db {
 			$query .= ' ON DUPLICATE KEY UPDATE '.implode(",", $query_parts);
 		}
 		return $query;
+	}
+	
+	public static function implode_for_update($fields, $strip_tags=true){
+		global $read_replica;
+		$fields = (array) $fields;
+		foreach($fields as $key => $value){
+			if ($strip_tags) $value = strip_tags($value);
+			if (is_numeric($value)){
+				$query_parts[] = "`".$key."`='".$value."'";
+			}elseif ($value == "NOW()" || $value == "NULL" || substr($value, 0, 13) == 'FROM_UNIXTIME'){
+				$query_parts[] = "`".$key."`=".$value."";
+			}else{
+				$query_parts[] = "`".$key."`='".$read_replica->real_escape_string($value)."'";
+			}
+		}
+		return "SET ".implode(",", $query_parts);
 	}
 }
 
