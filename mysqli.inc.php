@@ -16,7 +16,7 @@ define('READ_PASS', "***********");
 define('READ_DB', "***********");
 
 
-if (SEPARATE_READ_DB == true){
+if (USE_READ_REPLICA == true){
 	$read_replica = new mysqli(READ_HOST, READ_USER, READ_PASS, READ_DB);
 }
 
