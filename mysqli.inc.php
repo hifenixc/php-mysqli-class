@@ -216,20 +216,12 @@ class db {
 
 function json_return($json=false){
 
-	if ($json['redirect']){
-		header("location: {$json['redirect']}");
-		exit();
-	}elseif ($json['msg']){
-		header("location: /?msg={$json['msg']}&open_facebox={$json['facebox']}");//&next={$json['next']}
-		exit();
-	}else{
-		header('Content-type: application/json');
-		$json['isjson'] = true;
-		
-		echo json_encode($json, JSON_PRETTY_PRINT);
-		exit();
-	}
-	return $json;
+	header('Content-type: application/json');
+	
+	echo json_encode($json, JSON_PRETTY_PRINT);
+	
+	exit();
+
 }
 
 
