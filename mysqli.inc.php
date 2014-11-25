@@ -109,6 +109,16 @@ class db {
 			return false;
 		}
 	}
+	
+	public static function attempt($query){
+		$db = self::connect_to_master();
+
+		if ($q = $db->query($query)){
+			return $db->affected_rows;	
+		}else{
+			return false;
+		}
+	}
 
 	public static function row($query){
 		$q = db::select($query);
