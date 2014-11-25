@@ -26,7 +26,8 @@ php-mysqli-class
 			"first_name"=>"John",
 			"last_name"=>"Doe",
 			"city"=>"Amsterdam's",
-			"age"=>32
+			"age"=>32,
+			"date_added"=>"NOW()"
 		);
 	$insert_id = db::insert_into("table_name", $fields);
 	echo $insert_id;
@@ -44,7 +45,8 @@ php-mysqli-class
 			"first_name"=>"John",
 			"last_name"=>"Doe",
 			"city"=>"Amsterdam's",
-			"age"=>32
+			"age"=>32,
+			"date_updated"=>"NOW()"
 		);
 	$affected = db::update_table("table_name", $fields, "id=1");
 	echo $affected;
