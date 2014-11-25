@@ -16,8 +16,8 @@ php-mysqli-class
 
 **get only 1 field/value from a table**
 
-	$field = db::check("SELECT field FROM table WHERE id=1");
-	echo $field;
+	$total = db::check("SELECT COUNT(*) FROM table WHERE id=1");
+	echo $total;
 
 
 **handy insert query**
