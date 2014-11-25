@@ -18,6 +18,8 @@ define('READ_DB', "***********");
 
 if (USE_READ_REPLICA == true){
 	$read_replica = new mysqli(READ_HOST, READ_USER, READ_PASS, READ_DB);
+}else{
+	$read_replica = false;
 }
 
 if (!$read_replica || $read_replica->connect_errno) {
