@@ -37,10 +37,10 @@ class db {
 			$write_master = new mysqli(MASTER_HOST, MASTER_USER, MASTER_PASS, MASTER_DB);
 			if ($write_master->connect_errno) {
 				header('Content-type: application/json');
-			    json_encode(array(
-			    		"msg"=>"Unable to connect to the DemoDrop database, please try again later"
+			    	json_encode(array(
+			    		"msg"=>"Unable to connect to the database, please try again later"
 			    		)
-			   		);
+			   	);
 			    exit();
 			}
 			$write_master->set_charset("utf8");
