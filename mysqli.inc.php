@@ -180,20 +180,18 @@ class db {
 	public static function error($query, $db){
 	
 		$title = $db->errno.": ".$db->error;
-		$bericht = $title."\n";
-		$bericht .= print_r(debug_backtrace(), true);
-		$bericht .= "\n----------------------GET--------------------------\n";
-		$bericht .= print_r($_GET,1);
-		$bericht .= "\n----------------------POST--------------------------\n";
-		$bericht .= print_r($_POST,1);
-		$bericht .= "\n----------------------SERVER--------------------------\n";
-		$bericht .= print_r($_SERVER,1);
-		$bericht .= "\n----------------------SESSION--------------------------\n";
-		$bericht .= print_r($_SESSION,1);
+		$message = $title."\n";
+		$message .= print_r(debug_backtrace(), true);
+		$message .= "\n----------------------GET--------------------------\n";
+		$message .= print_r($_GET,1);
+		$message .= "\n----------------------POST--------------------------\n";
+		$message .= print_r($_POST,1);
+		$message .= "\n----------------------SERVER--------------------------\n";
+		$message .= print_r($_SERVER,1);
+		$message .= "\n----------------------SESSION--------------------------\n";
+		$message .= print_r($_SESSION,1);
 	
-		mail(ADMIN_EMAIL, "DD MYSQL_ERROR: ".$title, $query."\n".$bericht);
-
-		//echo "DATABASE ERROR - THE ERROR HAS BEEN REPORTED. PLEASE TRY AGAIN, OR COME BACK LATER";
+		mail(ADMIN_EMAIL, "MYSQL_ERROR: ".$title, $query."\n".$message);
 		
 		$json['msg'] = "DATABASE ERROR - THE ERROR HAS BEEN REPORTED. PLEASE TRY AGAIN, OR COME BACK LATER";
 		$json['msg_type'] = "error";
@@ -247,13 +245,9 @@ class db {
 
 
 function json_return($json=false){
-
 	header('Content-type: application/json');
-	
-	echo json_encode($json, JSON_PRETTY_PRINT);
-	
+	echo json_encode($json);//JSON_PRETTY_PRINT
 	exit();
-
 }
 
 
